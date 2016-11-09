@@ -7,4 +7,7 @@
     <string name="phonePrompt">Enter phone numbers separated by commas:</string>
     <string name="textPrompt">Enter the text message to be sent:</string>
     <string name="phoneExample">ie. 8035070114, 8032781985</string>
+    <string name="datePrompt">Would you like to delay this text?</string>
+    <string name="dateExample">ie. 10/2/2016</string>
+    <string name="timeExample">ie. 14:30</string>
 </resources>
