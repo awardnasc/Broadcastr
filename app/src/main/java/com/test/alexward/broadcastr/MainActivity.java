@@ -3,6 +3,7 @@ package com.test.alexward.broadcastr;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +17,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.os.Handler;
 
@@ -25,8 +28,11 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -36,8 +42,10 @@ public class MainActivity extends Activity {
 
     private Button saveButton;
     private CheckBox checkBox;
-    private EditText phone, text, date, time;
-    private String phoneList, textMessage, dateStr, timeStr;
+    public EditText phone, text, month, day, year, hour, minute;
+    public Calendar cal;
+
+    public String phoneList, textMessage, dateStr, timeStr;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -53,12 +61,20 @@ public class MainActivity extends Activity {
 
         phone = (EditText) findViewById(R.id.editText);
         text = (EditText) findViewById(R.id.editText2);
-     //   date = (EditText) findViewById(R.id.editText3);
-       // time = (EditText) findViewById(R.id.editText4);
+        month = (EditText) findViewById(R.id.editText5);
+        day = (EditText) findViewById(R.id.editText7);
+        year = (EditText) findViewById(R.id.editText8);
+
+        hour = (EditText) findViewById(R.id.editText4);
+        minute = (EditText) findViewById(R.id.editText3);
+
 
         Button saveButton = (Button) findViewById(R.id.button);
         //final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
 
+        /*if(checkBox.isChecked() == true){
+
+        }*/
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,37 +87,11 @@ public class MainActivity extends Activity {
                 if (TextUtils.isEmpty(phoneList)|| TextUtils.isEmpty(textMessage)){
                     return;
                 }
-                /*
-                int isChecked = 0;
-                if (checkBox.isChecked()) {
-                    isChecked = 1;
-                }
-                if (isChecked == 1) {
-                    dateStr = date.getText().toString();
-                    timeStr = time.getText().toString();
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable(){
-                        @Override
-                        public void run(){
-                            for (int i = 0; i < phoneArray.size(); i++) {
-                                Log.d(phoneArray.get(i), textMessage);
-
-                                //The below code causes a crash????
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(phoneArray.get(i), null, textMessage, null, null);
-
-                            }
-                        }
-                    }, 100);
-
-
-                }*/
 
                 /* send message to each phone number in Array */
                 for (int i = 0; i < phoneArray.size(); i++) {
                     Log.d(phoneArray.get(i), textMessage);
 
-                    //The below code causes a crash????
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(phoneArray.get(i), null, textMessage, null, null);
 
@@ -118,6 +108,51 @@ public class MainActivity extends Activity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    public void scheduleAlarm(View V){
+
+        phoneList = phone.getText().toString();
+        final List<String> phoneArray = Arrays.asList(phoneList.split(","));
+        textMessage = text.getText().toString();
+
+        if (TextUtils.isEmpty(phoneList)|| TextUtils.isEmpty(textMessage)){
+            Toast.makeText(this, "empty", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+        String mon = month.getText().toString();
+        int m = Integer.parseInt(mon);
+
+        String da = day.getText().toString();
+        int d = Integer.parseInt(da);
+
+        String ye = year.getText().toString();
+        int y = Integer.parseInt(ye);
+
+        String ho = hour.getText().toString();
+        int h = Integer.parseInt(ho);
+
+        String mi = minute.getText().toString();
+        int min = Integer.parseInt(mi);
+
+        cal=Calendar.getInstance();
+            cal.set(Calendar.MONTH, m);
+            cal.set(Calendar.DAY_OF_MONTH, d);
+            cal.set(Calendar.YEAR, y);
+            cal.set(Calendar.HOUR, h);
+            cal.set(Calendar.MINUTE, min);
+
+       // Long time = new GregorianCalendar().getTimeInMillis()+15*1000;
+        Intent intentAlarm = new Intent(this, AlarmReciever.class);
+        intentAlarm.putExtra("phone", phoneList);
+        intentAlarm.putExtra("text", textMessage);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                PendingIntent.getBroadcast(this,1,intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+
+        Toast.makeText(this,"Text Scheduled", Toast.LENGTH_LONG).show();
+    }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -153,6 +188,16 @@ public class MainActivity extends Activity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    public String getPhoneList(){
+        phoneList = phone.getText().toString();
+        return phoneList;
+    }
+
+    public String getTextMessage(){
+        textMessage = text.getText().toString();
+        return textMessage;
     }
 }
 

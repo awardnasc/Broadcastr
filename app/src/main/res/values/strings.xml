@@ -3,11 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="save">save</string>
     <string name="pageAddStr">Page for adding groups.</string>
-    <string name="sendButton">Send</string>
+    <string name="sendButton">Send Now</string>
+    <string name="sendDelayed">Send Delayed</string>
     <string name="phonePrompt">Enter phone numbers separated by commas:</string>
     <string name="textPrompt">Enter the text message to be sent:</string>
     <string name="phoneExample">ie. 8035070114, 8032781985</string>
-    <string name="datePrompt">Would you like to delay this text?</string>
-    <string name="dateExample">ie. 10/2/2016</string>
+    <string name="datePrompt">Set delay date and time:</string>
+    <string name="dateExample">ie. 10/2/16</string>
     <string name="timeExample">ie. 14:30</string>
 </resources>
