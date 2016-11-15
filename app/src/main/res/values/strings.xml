@@ -11,4 +11,9 @@
     <string name="datePrompt">Set delay date and time:</string>
     <string name="dateExample">ie. 10/2/16</string>
     <string name="timeExample">ie. 14:30</string>
+    <string name="ie_12">ie. 12</string>
+    <string name="ie_14">ie. 14</string>
+    <string name="ie_2016">ie. 2016</string>
+    <string name="ie_25">ie. 25</string>
+    <string name="ie_32">ie. 32</string>
 </resources>

@@ -61,13 +61,13 @@ public class MainActivity extends Activity {
 
         phone = (EditText) findViewById(R.id.editText);
         text = (EditText) findViewById(R.id.editText2);
-       /* month = (EditText) findViewById(R.id.editText5);
+        month = (EditText) findViewById(R.id.editText5);
         day = (EditText) findViewById(R.id.editText7);
         year = (EditText) findViewById(R.id.editText8);
 
         hour = (EditText) findViewById(R.id.editText4);
         minute = (EditText) findViewById(R.id.editText3);
-*/
+
 
         Button saveButton = (Button) findViewById(R.id.button);
         //final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
@@ -119,9 +119,10 @@ public class MainActivity extends Activity {
 
             return;
         }
-  /*
+
         String mon = month.getText().toString();
         int m = Integer.parseInt(mon);
+        m = m-1;
 
         String da = day.getText().toString();
         int d = Integer.parseInt(da);
@@ -135,14 +136,10 @@ public class MainActivity extends Activity {
         String mi = minute.getText().toString();
         int min = Integer.parseInt(mi);
 
-        cal=Calendar.getInstance();
-            cal.set(Calendar.MONTH, m);
-            cal.set(Calendar.DAY_OF_MONTH, d);
-            cal.set(Calendar.YEAR, y);
-            cal.set(Calendar.HOUR, h);
-            cal.set(Calendar.MINUTE, min);
-*/
-       // Long time = new GregorianCalendar().getTimeInMillis()+15*1000;
+
+        cal = Calendar.getInstance();
+        cal.set(y,m,d,h,min,0);
+
         Intent intentAlarm = new Intent(this, AlarmReciever.class);
         intentAlarm.putExtra("phone", phoneList);
         intentAlarm.putExtra("text", textMessage);
