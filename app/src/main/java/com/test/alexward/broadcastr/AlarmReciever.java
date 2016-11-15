@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -14,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Alex Ward on 11/14/2016.
+ *
  */
 
 public class AlarmReciever extends BroadcastReceiver {
@@ -43,10 +43,7 @@ public class AlarmReciever extends BroadcastReceiver {
             smsManager.sendTextMessage(phoneArray.get(i), null, message, null, null);
 
         }
-        /*
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNum, null, message, null, null);
-        */
+
 
         Toast.makeText(context, "Alarm Triggered and SMS Sent", Toast.LENGTH_LONG).show();
     }

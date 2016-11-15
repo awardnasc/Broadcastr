@@ -5,47 +5,38 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.os.Handler;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.sql.Time;
-import java.util.ArrayList;
+
+
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 import java.util.List;
 
 
-import static com.test.alexward.broadcastr.R.string.save;
-
 public class MainActivity extends Activity {
 
-    private Button saveButton;
-    private CheckBox checkBox;
+
     public EditText phone, text, month, day, year, hour, minute;
     public Calendar cal;
 
-    public String phoneList, textMessage, dateStr, timeStr;
+    public String phoneList, textMessage;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -111,7 +102,6 @@ public class MainActivity extends Activity {
     public void scheduleAlarm(View V){
 
         phoneList = phone.getText().toString();
-        final List<String> phoneArray = Arrays.asList(phoneList.split(","));
         textMessage = text.getText().toString();
 
         if (TextUtils.isEmpty(phoneList)|| TextUtils.isEmpty(textMessage)){
@@ -158,8 +148,7 @@ public class MainActivity extends Activity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Main Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Main Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
@@ -188,14 +177,5 @@ public class MainActivity extends Activity {
         client.disconnect();
     }
 
-    public String getPhoneList(){
-        phoneList = phone.getText().toString();
-        return phoneList;
-    }
-
-    public String getTextMessage(){
-        textMessage = text.getText().toString();
-        return textMessage;
-    }
 }
 
