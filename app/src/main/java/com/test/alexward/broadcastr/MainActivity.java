@@ -1,7 +1,6 @@
 package com.test.alexward.broadcastr;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,7 +30,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
 
     public EditText phone, text, month, day, year, hour, minute;
@@ -49,6 +49,8 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         phone = (EditText) findViewById(R.id.editText);
         text = (EditText) findViewById(R.id.editText2);
@@ -135,9 +137,9 @@ public class MainActivity extends Activity {
         intentAlarm.putExtra("text", textMessage);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
+        final int _id = (int) System.currentTimeMillis();
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                PendingIntent.getBroadcast(this,1,intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+                PendingIntent.getBroadcast(this,_id,intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
         Toast.makeText(this,"Text Scheduled", Toast.LENGTH_LONG).show();
     }

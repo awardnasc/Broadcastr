@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -151,27 +152,37 @@
 
     <Button
         android:text="@string/sendDelayed"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
         android:onClick="scheduleAlarm"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
         android:layout_alignBaseline="@+id/button"
         android:layout_alignBottom="@+id/button"
         android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
+        android:layout_alignStart="@+id/textView" />
+
+    <Button
+        android:text="@string/view_scheduled_alarms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button4" />
 
     <Button
         android:text= "@string/sendButton"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:id="@+id/button"
         android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_marginRight="24dp"
+        android:layout_above="@+id/button4"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="27dp" />
 
 
 </RelativeLayout>
