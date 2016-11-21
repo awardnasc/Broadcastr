@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public EditText phone, text, month, day, year, hour, minute;
     public Calendar cal;
-
+    public int count;
     public String phoneList, textMessage;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+        count = 0;
         phone = (EditText) findViewById(R.id.editText);
         text = (EditText) findViewById(R.id.editText2);
         month = (EditText) findViewById(R.id.editText5);
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
         intentAlarm.putExtra("text", textMessage);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        final int _id = (int) System.currentTimeMillis();
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                PendingIntent.getBroadcast(this,_id,intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                PendingIntent.getBroadcast(this,count,intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        count++;
         Toast.makeText(this,"Text Scheduled", Toast.LENGTH_LONG).show();
     }
 
