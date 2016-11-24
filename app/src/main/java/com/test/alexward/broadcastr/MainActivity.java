@@ -144,6 +144,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"Text Scheduled", Toast.LENGTH_LONG).show();
     }
 
+    public void clearAlarms(View V){
+        for(int i = 0; i < count; i++){
+            Intent alarmIntent = new Intent(this, AlarmReciever.class);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            PendingIntent displayIntent =  PendingIntent.getBroadcast(this,i,alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            alarmManager.cancel(displayIntent);
+            Toast.makeText(this, "Cancelled alarm #" + i, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.

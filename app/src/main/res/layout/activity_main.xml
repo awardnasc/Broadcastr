@@ -150,28 +150,17 @@
             android:hint="@string/ie_32"
             android:textAlignment="center"/>
 
-    <!--
+
     <Button
         android:text="@string/view_scheduled_alarms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/button4" />
--->
+        android:id="@+id/button4"
+        android:onClick="clearAlarms"/>
 
-    <Button
-        android:text="@string/sendDelayed"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="scheduleAlarm"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="20dp" />
+
 
     <Button
         android:text= "@string/sendButton"
@@ -185,6 +174,18 @@
         android:layout_alignEnd="@+id/textView"
         android:layout_marginRight="23dp"
         android:layout_marginEnd="23dp" />
+
+    <Button
+        android:text="@string/sendDelayed"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:onClick="scheduleAlarm"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_above="@+id/button4"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
 
 </RelativeLayout>
